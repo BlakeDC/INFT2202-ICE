@@ -28,13 +28,20 @@ ulElement.insertBefore(newLiElementStart, ulElement.firstChild);
 
 // ADD A CLASS OF COOL TO ALL LIST ITEMS
 // Counter variable
+var allLiElements = document.querySelectorAll('li');
 // Loop through elements
-// Change class to cool
+for (var i = 0; i < allLiElements.length; i++) {
 
+    // Change class to cool
+    allLiElements[i].classList.add('cool');
+}
 
 // ADD NUMBER OF ITEMS IN THE LIST TO THE HEADING
 // h2 element
 // h2 text
+var h2Element = document.querySelector('h2');
 // No. of <li> elements
+var numberOfItems = allLiElements.length;
 // Content
 // Update h2 using innerHTML (not textContent) because it contains markup
+h2Element.innerHTML = 'Buy groceries - ' + numberOfItems + ' items';
