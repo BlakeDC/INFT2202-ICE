@@ -14,9 +14,13 @@ ulElement.appendChild(newLiElementEnd);
 
 // ADD NEW ITEM START OF LIST
 // Create element
+var newLiElementStart = document.createElement('li');
 // Create text node
+var textNodeStart = document.createTextNode('bread');
 // Add text node to element
-// Add element to list
+newLiElementStart.appendChild(textNodeStart);
+// Add element to list at the beginning
+ulElement.insertBefore(newLiElementStart, ulElement.firstChild);
 
 
 
