@@ -1,11 +1,16 @@
 // ADDING ITEMS TO START AND END OF LIST
 // Get the <ul> element
+var ulElement = document.querySelector('ul');
 
 // ADD NEW ITEM TO END OF LIST
 // Create element
+var newLiElementEnd = document.createElement('li');
 // Create text node
+var textNodeEnd = document.createTextNode('Pizza');
 // Add text node to element
+newLiElementEnd.appendChild(textNodeEnd);
 // Add element end of list
+ulElement.appendChild(newLiElementEnd);
 
 // ADD NEW ITEM START OF LIST
 // Create element
@@ -14,7 +19,7 @@
 // Add element to list
 
 
-//hi
+
 // All <li> elements
 
 // ADD A CLASS OF COOL TO ALL LIST ITEMS
