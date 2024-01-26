@@ -54,8 +54,7 @@ document.addEventListener('DOMContentLoaded', function () {
         event.preventDefault(); 
   
         // Reset error messages
-        document.getElementById('generalError').innerText = '';
-        document.getElementById('generalError').style.backgroundColor = '';
+        clearErrors();
     
         // Get the value of the username input
         var usernameInput = document.getElementById('usernameInput').value;
@@ -66,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
             // Update generalError with error message
             document.getElementById('generalError').innerText =
             'Invalid username. Please use only letters, numbers, and underscores.';
+
             //Update generalError with red background
             document.getElementById('generalError').style.backgroundColor = 'red';
         } else {
@@ -73,13 +73,29 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('Form submitted successfully!');
         }
     }
-  
-    // Attach the validateForm function to the form's submit event
-    var registrationForm = document.getElementById('registration-form');
-    if (registrationForm) {
-      registrationForm.addEventListener('submit', validateForm);
+
+      // Function to clear error messages when the form is reset
+    function clearErrors() {
+        var generalError = document.getElementById('generalError');
+        // Empty generalError text
+        generalError.innerText = '';
+
+        // Remove generError background colour
+        generalError.style.backgroundColor = '';
     }
-  });
+  
+    // Get reference to form by id
+    var registrationForm = document.getElementById('registration-form');
+
+    // Check if the form element exists
+    if (registrationForm) {
+        // Attatch the validateForm function to the submit event
+        registrationForm.addEventListener('submit', validateForm);
+
+        // Attatch the clearErrors function to the reset event
+        registrationForm.addEventListener('reset', clearErrors);
+    }
+});
   
 //TODO:
 // Make all fields required (HTML)
