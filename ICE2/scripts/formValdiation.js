@@ -37,6 +37,50 @@ function validateEmailAddressRegex(emailString) {
 }
 
 
+document.addEventListener('DOMContentLoaded', function () {
+     // Function to validate the username
+    function isUsernameValid(username) {
+        // regex to allow only letters, numbers and underscore
+        // Source: User Amir at https://stackoverflow.com/questions/9628879/javascript-regex-username-validation
+        const regex = /^[a-zA-Z0-9_]+$/;
+    
+        return regex.test(username);
+        }
+  
+    // Function to handle form submission
+    function validateForm(event) {
+
+        // Prevent the form from submitting initially
+        event.preventDefault(); 
+  
+        // Reset error messages
+        document.getElementById('generalError').innerText = '';
+        document.getElementById('generalError').style.backgroundColor = '';
+    
+        // Get the value of the username input
+        var usernameInput = document.getElementById('usernameInput').value;
+    
+        // Validate the username
+        if (!isUsernameValid(usernameInput)) {
+            // If username is not valid, display error message and red highlight
+            // Update generalError with error message
+            document.getElementById('generalError').innerText =
+            'Invalid username. Please use only letters, numbers, and underscores.';
+            //Update generalError with red background
+            document.getElementById('generalError').style.backgroundColor = 'red';
+        } else {
+            // Log success message
+            console.log('Form submitted successfully!');
+        }
+    }
+  
+    // Attach the validateForm function to the form's submit event
+    var registrationForm = document.getElementById('registration-form');
+    if (registrationForm) {
+      registrationForm.addEventListener('submit', validateForm);
+    }
+  });
+  
 //TODO:
 // Make all fields required (HTML)
 // Add a pattern attribute in the telephone element (HTML)
