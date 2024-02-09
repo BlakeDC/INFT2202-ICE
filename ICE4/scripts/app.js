@@ -1,7 +1,7 @@
 console.log('app.js loaded')
 // TO DO: load the user class script with alias
 import * as userClass from "./user.js";
-import * as formValidation from ".form.js";
+import * as formValidation from "./form.js";
 let newUser = new userClass.User("Blake", "Munro", "blake.munro", "jell@example.ca", "fakePassword");
 console.log(newUser.displayUser())
 
@@ -189,10 +189,10 @@ if ($('.gallery')){
                 // fade it back in
                 $(this).fadeIn(1000);
                 // debug statement
-                console.log($(this).attr("src"))
-            })
+                console.log($(this).attr("src"));
+            });
             //set the time for more than how long the fade out and in process will take or you won't get the images you expect
-        }, 3000);
+        }, 4000);
     })
 }
 
