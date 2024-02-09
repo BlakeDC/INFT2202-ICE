@@ -48,7 +48,7 @@ $(function () {
     let text = "It is one of his best works!"
     // create a paragraph
     let newP = $("<p></p>");
-    // TO DO: add text with html()
+    // add text with html()
     newP.text(text);
     // append to contentDiv
     contentDiv.append(newP);
@@ -57,9 +57,9 @@ $(function () {
 
     // update text
     newP.text("I am very excited for the opening of the new adaptation of his work.");
-    // TO DO: test when very excited is in a strong tag
+    // test when very excited is in a strong tag
     newP.html("I am <strong>very excited</strong> for the opening of the new adaptation of his work.");
-    // TO DO: append to newP text
+    // append to newP text
 
 });
 
@@ -67,7 +67,6 @@ $(function () {
  * function to demo adding toggle to button
  *  */
  $(function () {
-    // TO DO: complete the function
     // get the button
     let btnHide = $("#toggleDivBtn");
     // add a click function
@@ -77,14 +76,16 @@ $(function () {
 
         // for each p in the div
         $(paragraphs).each(function(){
-            //if(){
-                // if it has toggleHide class
+            // if it has toggleHide class
+            if($(this).hasClass("toggleHide")){
                 //remove toggleHide class and add toggleShow class
                 // styling is controlled in the css
-            //} else{
+                $(this).removeClass("toggleHide").addClass("toggleShow")
+            } else{
                 // otherwise assume it has the toggleShow class
                 //remove toggleShow and add toggleHide
-           // }
+                $(this).removeClass("toggleShow").addClass("toggleHide") 
+            }
         })
     })
 });
@@ -92,12 +93,12 @@ $(function () {
 
 
 // FORM JQUERY
-// TO DO: import form validation functions with alias
+// import form validation functions with alias
 // import * as formValidation from ".form.js";
 // we did this at the top of the file, as to follow most industry standards
 // if the submit button is on the page
 if ($("#btnRegSubmit")) {
-    // TO DO: add a click function that calls a callack function
+    // add a click function that calls a callack function
     $("#btnRegSubmit").click(function (e) {
         // prevent the default submit action (stay on the page)
         e.preventDefault();
@@ -123,17 +124,17 @@ if ($("#btnRegSubmit")) {
         // validate first name
         $("#first-group").children(".errorMessage").html(formValidation.validateFirst(unvalidated_user.firstName));
         // validate last name
-        $("#lirst-group").children(".errorMessage").html(formValidation.validateLast(unvalidated_user.lastName));
-        // validate  username
+        $("#last-group").children(".errorMessage").html(formValidation.validateLast(unvalidated_user.lastName));
+        // validate username
         $("#username-group").children(".errorMessage").html(formValidation.validateUsername(unvalidated_user.username));
         // validate confirm password
         let error = formValidation.validatePassword(unvalidated_user.password, $("#inputPassword2").val());
-        $("pass1-group").children(".errorMessage").html(error)
-        $("pass2-group").children(".errorMessage").html(error)
+        $("#pass1-group").children(".errorMessage").html(error)
+        $("#pass2-group").children(".errorMessage").html(error)
     });
 }
 
-// TO DO: if reset button present
+// if reset button present
 if ($("#btnRegReset")){
     // bind a click event handler
     $("#btnRegReset").click(function(e){
@@ -145,7 +146,7 @@ if ($("#btnRegReset")){
 
         
 // SLIDESHOW
-// TO DO: if there's a gallery class on the page
+// if there's a gallery class on the page
 if ($('.gallery')){
 
     // call a callback function to handle the galler rotation
