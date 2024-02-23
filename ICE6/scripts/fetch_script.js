@@ -6,6 +6,9 @@ let btn_fetch = $('#fetchJoke');
 // create a url variable
 let url_fetch = "https://icanhazdadjoke.com/";
 
+// get the output paragraph
+let output_fetch = $('#output');
+
 //need a header Accept value set to 'application/json'
 let myFetchHeader = {"Accept": "application/json"};
 
@@ -25,8 +28,8 @@ $(btn_fetch).click(() => {
     .then((jsonRes) => {
         // console log the json
         console.log(jsonRes);
-        // SHOW OUTPUT IN OUTPUT BOX
         // set the output
+        output_fetch.text(jsonRes.joke);
     })    
 })
     

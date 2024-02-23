@@ -6,6 +6,9 @@ let btn_xhr = $('#xhrJoke');
 // create a url variable
 let url_xhr = "https://icanhazdadjoke.com/";
 
+// get the output paragraph
+let output_xhr = $('#output');
+
 // create a click callback that handles the API call
 $(btn_xhr).click(() => {
     // instantiate an XMLHttpRequest object
@@ -22,12 +25,12 @@ $(btn_xhr).click(() => {
              let joke = xhr.responseText;
             // console log
             console.log(joke);
-            // SHOW OUTPUT IN THE OUTPUT BOX
             // JSON.parse the joke
+            let parsedJoke = JSON.parse(joke);
             // set the output
+            output_xhr.text(parsedJoke.joke);
             }
     }
-
     // send the request
     xhr.send();
 })
