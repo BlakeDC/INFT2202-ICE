@@ -26,20 +26,27 @@ const makePosts = (pictureData) =>
             let id = i;
             let pixabayPicture = pictureData[i];
     
-            let card = $('<div class="card">hi</div>')
+            let card = $('<div class="card"></div>')
                 .attr("id", "card_" + id)
                 .appendTo(blogColumn);
+            
+            // Append Image to card element
             let pic = $('<img>')
                 .attr('id', "img-"+ i)
                 .attr("src", pixabayPicture.webformatURL)
                 .attr("alt", pixabayPicture.tags)
                 .addClass('card-img-top')
-                // TODO APPEND TO CARD
+                .appendTo(card);
+            
+            // Append card body to card element
             let cardBody = $('<div class="card-body"></div>')
-            // append car body to card element
+            .appendTo(card);
     
-            let cardParagraph = $('p class="card-text tags"></p>')
-            // append paragraph to card body
+            let cardParagraph = $('<p class="card-text tags"></p>')
+            // Display Tags
+            .text("Tags: " + pixabayPicture.tags)
+            // Append paragraph to card body
+            .appendTo(cardBody);
         }
     }
 };
@@ -54,14 +61,13 @@ const getPictures = () =>
     const url = `${PIXABAY_URL.replace('<API_KEY>', PIXABAY_API_KEY)}&q=cars&orientation=horizontal&image_type=photo&per_page=${IMAGE_COUNT}`;
     // use fetch to get the pictures from the API
     fetch(url)
-    .then((res) => {
-        console.log(res.json())
-        return res.json();
-    })
+    .then((res) => res.json())
+        //console.log(res.json())
+    
     .then((data) => {
         // data retrieved
         // make post here
-        //console.log(data);
+        console.log(data);
         if (data?.hits?.length > 0){
             // Make sure data is not null
             // create posts for all pictures
