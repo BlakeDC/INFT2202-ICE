@@ -1,0 +1,5 @@
+# Ignore process.env
+process.env
+
+# Ignore node_modules
+node_modules

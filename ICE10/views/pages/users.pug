@@ -1,0 +1,19 @@
+extends ../index
+block content
+    table.table.table-striped
+        tr
+            th Name
+            th Age
+            th Email
+            th Status
+            th Friends
+        each user in users 
+             tr
+                td= user.name
+                td= user.age
+                td= user.email
+                td= user.isActive ? 'Active' : 'Inactive'
+                td
+                    ul
+                    each friend in user.friends
+                        li= friend     
