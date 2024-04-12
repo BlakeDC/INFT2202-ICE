@@ -1,4 +1,5 @@
 const bcrypt = require("bcrypt");
+const passport = require("passport");
 const saltRounds = 12;
 const MIN_PASSWORD_LENGTH = 8;
 const MIN_USERNAME_LENGTH = 5;
@@ -30,7 +31,8 @@ function renderLogin(req, res, returnObj) {
   res.render("login", {
     pageTitle: "Login",
     errorMessage: errorMessage,
-    successMessage: successMessage
+    successMessage: successMessage,
+    isLoggedIn: !!req.session?.passport?.user
   });
 }
 
@@ -44,6 +46,7 @@ function renderRegister(req, res, errorMessage = "") {
   res.render("register", {
     pageTitle: "Register a New Account",
     errorMessage: errorMessage,
+    isLoggedIn: !!req.session?.passport?.user
   });
 }
 
@@ -55,6 +58,7 @@ function renderRegister(req, res, errorMessage = "") {
 exports.homeView = (req, res) => {
   res.render("home", {
     pageTitle: "INFT 2202 - Home Page",
+    isLoggedIn: !!req.session?.passport?.user
   });
 };
 
@@ -85,9 +89,12 @@ const getLoginFailure = (req, res) => {
  * @param {*} next
  */
 const getLoginSuccess = (req, res) => {
+  console.log('---LoginSuccess', req.session, !!req.session?.passport?.user)
+
   res.render("login-success", {
     pageTitle: "",
-    user: { username: req.body.username },
+    user: { username: req.session?.passport?.user },
+    isLoggedIn: !!req.session?.passport?.user
   });
 };
 
@@ -95,34 +102,28 @@ const getLoginSuccess = (req, res) => {
  * handle login form submit
  * @param {*} req
  * @param {*} res
- * @param {*} nex
+ * @param {*} next
  */
-exports.postLogin = (req, res) => {
-  let usernameEntry = req.body.username;
-  let passwordEntry = req.body.password;
-  // check to see if user pass combo exists
-  // render either login-failure or login-success
-  // check against DB instead of hardcoded values
+exports.postLogin = (req, res, next) => {
+  // use passport to authenticate
+  passport.authenticate("local", function(err, user, info) {
+    if (err) {
+      renderLogin(req, res, {errorMessage: err})
+    }
 
-  userExists(usernameEntry).then(function (user) {
-    if (user) {
-      // username match
-      // check password hash
-      bcrypt.compare(passwordEntry, user.hashPassword, function (err, result) {
-        if (err == null && result) {
-          // correct password
-          getLoginSuccess(req, res);
-        } else {
-          // either an error or incorrect password entry
-          getLoginFailure(req, res);
-        }
-      });
-    } else {
-      // username not found
-      // show error
+    if (!user) {
       getLoginFailure(req, res);
     }
-  });
+
+    req.logIn(user, function(err) {
+      if(err){
+        renderLogin(req, res, {errorMessage: err})
+      }
+
+      getLoginSuccess(req, res);
+    });
+
+  })(req, res, next);
 };
 
 
