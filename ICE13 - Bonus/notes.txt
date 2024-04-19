@@ -1,0 +1,9 @@
+When a move is made such that one of the following condition holds, all conflicting cells will be highlighted usign the 'error' CSS class:
+
+- another of the same digit is present elsewhere in the same row
+- another of the same digit is present elsewhere in the same column
+- another of the same digit is present elsewhere in the same 3x3 block
+
+Note: Be sure to handle the case where the x and y values are identical. That would not be a conflict.
+
+The undo button will undo the last move made by the user. This will include un-highlighting any previously highlighted cells from an erroneous move. In the current setup there are variables which save the entire board state 
